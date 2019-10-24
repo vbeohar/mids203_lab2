@@ -370,8 +370,9 @@ summary {
 <div id="TOC">
 <ul>
 <li><a href="#the-data">The Data</a></li>
-<li><a href="#the-assignment">The Assignment</a></li>
+<li><a href="#assignment">Assignment</a><ul>
 <li><a href="#submission-guidelines">Submission Guidelines</a></li>
+</ul></li>
 <li><a href="#research-questions">Research Questions</a><ul>
 <li><a href="#question-1-do-us-voters-have-more-respect-for-the-police-or-for-journalists">Question 1: Do US voters have more respect for the police or for journalists?</a><ul>
 <li><a href="#introduce-your-topic-briefly.-5-points">Introduce your topic briefly. (5 points)</a></li>
@@ -410,11 +411,11 @@ summary {
 <div id="the-data" class="section level1">
 <h1>The Data</h1>
 <p>The American National Election Studies (ANES) conducts surveys of voters in the United States. While its flagship survey occurs every four years at the time of each presidential election, ANES also conducts pilot studies midway between these elections. You are provided with data from the 2018 ANES Pilot Study.</p>
-<p>An important disclaimer is that the ANES Pilot Study does not represent a random sample of the U.S. population. Participants are taken from the YouGov panel, which is an online system in which users earn rewards for completing questionnaires. This feature limits the extent to which results generalize to the U.S. population.</p>
-<p>To account for differences between the YouGov panel and the U.S. Population, ANES assigns a survey weight to each observation. This weight estimates the degree to which a citizen with certain observed characteristics is over- or under-represented in the sample. For the purposes of this assignment, however, you are not asked to use the survey weights. Instead, you should view your analysis as pertaining to the population of YouGov participants. (For groups with a strong interest in survey analysis, we recommend that you read about R’s <a href="http://r-survey.r-forge.r-project.org/survey/">survey package</a>. We will assign a very small number of bonus points (up to 3) to any group that correctly applies the survey weights and includes a clear explanation of how these work).</p>
 <p>For a glimpse into some of the intricacies that go into the design of this study, take a look at the introduction to the <a href="https://electionstudies.org/wp-content/uploads/2019/02/anes_pilot_2018_userguidecodebook.pdf">ANES User’s Guide and Codebook</a>.</p>
+<p>It is important to consider the way that the ANES sample was created. Survery participants are taken from the YouGov panel, which is an online system in which users earn rewards for completing questionnaires. This feature limits the extent to which results generalize to the U.S. population.</p>
+<p>To partially account for differences between the YouGov panel and the U.S. Population, ANES assigns a survey weight to each observation. This weight estimates the degree to which a citizen with certain observed characteristics is over- or under-represented in the sample. For the purposes of this assignment, however, you are not asked to use the survey weights. (For groups with a strong interest in survey analysis, we recommend that you read about R’s <a href="http://r-survey.r-forge.r-project.org/survey/">survey package</a>. We will assign a very small number of bonus points (up to 3) to any group that correctly applies the survey weights and includes a clear explanation of how these work).</p>
 <pre class="r"><code>anes &lt;- read.csv(&quot;anes_pilot_2018.csv&quot;)</code></pre>
-<p>The Following is an example of a question asked on the ANES survey:</p>
+<p>Following is an example of a question asked on the ANES survey:</p>
 <blockquote>
 <p>How difficult was it for you to vote in this last election?</p>
 </blockquote>
@@ -427,18 +428,27 @@ summary {
 <li><code>4</code> Very difficult</li>
 <li><code>5</code> Extremely difficult</li>
 </ul>
-<p>To see the precise form of each question, take a look at the <a href="https://electionstudies.org/wp-content/uploads/2018/12/anes_pilot_2018_questionnaire.pdf">Questionnaire Specifications</a>. <!-- #endregion --></p>
+<p>To see the precise form of each question, take a look at the <a href="https://electionstudies.org/wp-content/uploads/2018/12/anes_pilot_2018_questionnaire.pdf">Questionnaire Specifications</a>.</p>
 </div>
-<div id="the-assignment" class="section level1">
-<h1>The Assignment</h1>
-<p>You will use the ANES dataset to address five research questions. For each question, you will need to operationalize the concepts (selecting appropriate variables and possibly transforming them), conduct exploratory analysis, deal with non-response and other special codes, perform sanity checks, select an appropriate hypothesis test, conduct the test, and interpret your results. When selecting a hypothesis test, you may choose from the tests covered in the async, including both paired and unpaired t-tests, as well as their nonparametric analogues. You may select a one-tailed or two-tailed test.</p>
+<div id="assignment" class="section level1">
+<h1>Assignment</h1>
+<p>You will use the ANES dataset to address five research questions. For each question, you will need to operationalize the concepts (selecting appropriate variables and possibly transforming them), conduct exploratory analysis, deal with non-response and other special codes, perform sanity checks, select an appropriate hypothesis test, conduct the test, and interpret your results. When selecting a hypothesis test, you may choose from the tests covered in the async videos and readings. These include both paired and unpaired t-tests, Wilcoxon rank-sum test, Wilcoxon signed-rank test, and sign test. You may select a one-tailed or two-tailed test.</p>
 <p>Please organize your response according to the prompts in this notebook.</p>
 <p>Note that this is a group lab. There is a <strong>maximum of three students per team.</strong> Although you may work on your own, we do not recommend this (we have found that individuals tend to do worse than teams on past labs).</p>
-<p>Please limit your submission to 15 pages in total. This means that you will have to carefully prioritize which visualizations to include.</p>
+<p>Please limit your submission to 4500 words, not counting code or figures. We will use some python code like the following to perform the wordcount on your notebook or Rmd file.</p>
+<pre><code>import nbformat
+
+with open(&#39;W203_Lab_2.ipynb&#39;) as f:
+    nb = nbformat.read(f, as_version=4)
+    total_words = 0
+
+    for cell in nb[&#39;cells&#39;]:
+        if cell[&#39;cell_type&#39;] == &#39;markdown&#39;:
+            total_words += len(cell[&#39;source&#39;].split())
+    print(&quot;Total words:&quot;, total_words)</code></pre>
 <p><strong>Hint:</strong> When answering questions about the potential gaps between conceptual and operational definitions it is often helpful to ask yourself “If I could do anything I wanted, including borrowing Rick’s portal gun, or doing an FMRI scan on all survey takers, to operationalize this particular concept how would I do it” and then explain how that is different than what is actually measured.</p>
-</div>
-<div id="submission-guidelines" class="section level1">
-<h1>Submission Guidelines</h1>
+<div id="submission-guidelines" class="section level2">
+<h2>Submission Guidelines</h2>
 <ul>
 <li>Submit <em>one</em> report per group.</li>
 <li>Submit <em>both</em> your pdf report as well as your source file.</li>
@@ -447,9 +457,11 @@ summary {
 <li>Naming structure of submitted files:
 <ul>
 <li>PDF report: [student_surname_1]_[student_surname_2][_*]_lab_2.pdf</li>
-<li>Jupyter Notebook: [student_surname_1]_[student_surname_2][_*]_lab_2.ipynb</li>
+<li>Jupyter Notebook: [student_surname_1]_[student_surname_2][_*]_lab_2.ipynb (or)</li>
+<li>Rmd file: [student_surname_1]_[student_surname_2][_*]_lab_2.Rmd</li>
 </ul></li>
 </ul>
+</div>
 </div>
 <div id="research-questions" class="section level1">
 <h1>Research Questions</h1>
@@ -458,9 +470,6 @@ summary {
 <div id="introduce-your-topic-briefly.-5-points" class="section level3">
 <h3>Introduce your topic briefly. (5 points)</h3>
 <p>Explain how your variables are operationalized. Comment on any gaps that you can identify between your operational definitions and the concepts you are trying to study.</p>
-<blockquote>
-
-</blockquote>
 </div>
 <div id="perform-an-exploratory-data-analysis-eda-of-the-relevant-variables.-5-points" class="section level3">
 <h3>Perform an exploratory data analysis (EDA) of the relevant variables. (5 points)</h3>
@@ -468,7 +477,7 @@ summary {
 </div>
 <div id="based-on-your-eda-select-an-appropriate-hypothesis-test.-5-points" class="section level3">
 <h3>Based on your EDA, select an appropriate hypothesis test. (5 points)</h3>
-<p>Explain why your test is the most appropriate choice, focusing on its statistical assumptions.</p>
+<p>Explain why your test is the most appropriate choice. List and evaluate all assumptions for your test.</p>
 </div>
 <div id="conduct-your-test.-5-points" class="section level3">
 <h3>Conduct your test. (5 points)</h3>
@@ -487,7 +496,7 @@ summary {
 </div>
 <div id="based-on-your-eda-select-an-appropriate-hypothesis-test.-5-points-1" class="section level3">
 <h3>Based on your EDA, select an appropriate hypothesis test. (5 points)</h3>
-<p>Explain why your test is the most appropriate choice, focusing on its statistical assumptions.</p>
+<p>Explain why your test is the most appropriate choice. List and evaluate all assumptions for your test.</p>
 </div>
 <div id="conduct-your-test.-5-points-1" class="section level3">
 <h3>Conduct your test. (5 points)</h3>
@@ -506,7 +515,7 @@ summary {
 </div>
 <div id="based-on-your-eda-select-an-appropriate-hypothesis-test.-5-points-2" class="section level3">
 <h3>Based on your EDA, select an appropriate hypothesis test. (5 points)</h3>
-<p>Explain why your test is the most appropriate choice, focusing on its statistical assumptions.</p>
+<p>Explain why your test is the most appropriate choice. List and evaluate all assumptions for your test.</p>
 </div>
 <div id="conduct-your-test.-5-points-2" class="section level3">
 <h3>Conduct your test. (5 points)</h3>
@@ -525,7 +534,7 @@ summary {
 </div>
 <div id="based-on-your-eda-select-an-appropriate-hypothesis-test.-5-points-3" class="section level3">
 <h3>Based on your EDA, select an appropriate hypothesis test. (5 points)</h3>
-<p>Explain why your test is the most appropriate choice, focusing on its statistical assumptions.</p>
+<p>Explain why your test is the most appropriate choice. List and evaluate all assumptions for your test.</p>
 </div>
 <div id="conduct-your-test.-5-points-3" class="section level3">
 <h3>Conduct your test. (5 points)</h3>
@@ -543,7 +552,7 @@ summary {
 <h3>Perform EDA and select your hypothesis test (5 points)</h3>
 <p>Perform an exploratory data analysis (EDA) of the relevant variables.</p>
 <p>This should include a treatment of non-response and other special codes, basic sanity checks, and a justification for any values that are removed. Use visual tools to assess the relationship among your variables and comment on any features you find.</p>
-<p>Based on your EDA, select an appropriate hypothesis test. Explain why your test is the most appropriate choice, focusing on its statistical assumptions.</p>
+<p>Based on your EDA, select an appropriate hypothesis test. Explain why your test is the most appropriate choice. List and evaluate all assumptions for your test.</p>
 </div>
 <div id="conduct-your-test.-2-points" class="section level3">
 <h3>Conduct your test. (2 points)</h3>

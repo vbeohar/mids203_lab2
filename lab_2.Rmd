@@ -10,28 +10,28 @@ jupyter:
     display_name: R
     language: R
     name: ir
+title: 'Comparing Means' 
+author: 'w203 Statistics for Data Science'
 output: 
   html_document: 
-    toc: true
-title: 'Comparing Means' 
-author: 'w203 Statistics for Data Science' 
+    toc: true 
 ---
 
 # The Data
 
 The American National Election Studies (ANES) conducts surveys of voters in the United States.  While its flagship survey occurs every four years at the time of each presidential election, ANES also conducts pilot studies midway between these elections.  You are provided with data from the 2018 ANES Pilot Study.
 
-An important disclaimer is that the ANES Pilot Study does not represent a random sample of the U.S. population.  Participants are taken from the YouGov panel, which is an online system in which users earn rewards for completing questionnaires.  This feature limits the extent to which results generalize to the U.S. population.
-
-To account for differences between the YouGov panel and the U.S. Population, ANES assigns a survey weight to each observation.  This weight estimates the degree to which a citizen with certain observed characteristics is over- or under-represented in the sample.  For the purposes of this assignment, however, you are not asked to use the survey weights.  Instead, you should view your analysis as pertaining to the population of YouGov participants.  (For groups with a strong interest in survey analysis, we recommend that you read about R's [survey package](http://r-survey.r-forge.r-project.org/survey/).  We will assign a very small number of bonus points (up to 3) to any group that correctly applies the survey weights and includes a clear explanation of how these work).
-
 For a glimpse into some of the intricacies that go into the design of this study, take a look at the introduction to the [ANES User's Guide and Codebook](https://electionstudies.org/wp-content/uploads/2019/02/anes_pilot_2018_userguidecodebook.pdf).
+
+It is important to consider the way that the ANES sample was created.  Survery participants are taken from the YouGov panel, which is an online system in which users earn rewards for completing questionnaires.  This feature limits the extent to which results generalize to the U.S. population.
+
+To partially account for differences between the YouGov panel and the U.S. Population, ANES assigns a survey weight to each observation.  This weight estimates the degree to which a citizen with certain observed characteristics is over- or under-represented in the sample.  For the purposes of this assignment, however, you are not asked to use the survey weights.  (For groups with a strong interest in survey analysis, we recommend that you read about R's [survey package](http://r-survey.r-forge.r-project.org/survey/).  We will assign a very small number of bonus points (up to 3) to any group that correctly applies the survey weights and includes a clear explanation of how these work).
 
 ```{r}
 anes <- read.csv("anes_pilot_2018.csv")
 ```
 
-The Following is an example of a question asked on the ANES survey:
+Following is an example of a question asked on the ANES survey:
 
 > How difficult was it for you to vote in this last election?
 
@@ -44,22 +44,36 @@ The variable `votehard` records answers to this question, with the following enc
 - `4` Very difficult
 - `5` Extremely difficult
 
+
 To see the precise form of each question, take a look at the [Questionnaire Specifications](https://electionstudies.org/wp-content/uploads/2018/12/anes_pilot_2018_questionnaire.pdf).
-<!-- #endregion -->
 
-# The Assignment
+# Assignment
 
-You will use the ANES dataset to address five research questions.  For each question, you will need to operationalize the concepts (selecting appropriate variables and possibly transforming them), conduct exploratory analysis, deal with non-response and other special codes, perform sanity checks, select an appropriate hypothesis test, conduct the test, and interpret your results.  When selecting a hypothesis test, you may choose from the tests covered in the async, including both paired and unpaired t-tests, as well as their nonparametric analogues.  You may select a one-tailed or two-tailed test. 
+You will use the ANES dataset to address five research questions.  For each question, you will need to operationalize the concepts (selecting appropriate variables and possibly transforming them), conduct exploratory analysis, deal with non-response and other special codes, perform sanity checks, select an appropriate hypothesis test, conduct the test, and interpret your results.  When selecting a hypothesis test, you may choose from the tests covered in the async videos and readings.  These include both paired and unpaired t-tests, Wilcoxon rank-sum test, Wilcoxon signed-rank test, and sign test.  You may select a one-tailed or two-tailed test.
 
 Please organize your response according to the prompts in this notebook.
 
-Note that this is a group lab.  There is a **maximum of three students per team.** Although you may work on your own, we do not recommend this (we have found that individuals tend to do worse than teams on past labs).
+Note that this is a group lab.  There is a **maximum of three students per team.**
+Although you may work on your own, we do not recommend this (we have found that individuals tend to do worse than teams on past labs).
 
-Please limit your submission to 15 pages in total.  This means that you will have to carefully prioritize which visualizations to include.
+Please limit your submission to 4500 words, not counting code or figures.  We will use some python code like the following to perform the wordcount on your notebook or Rmd file.
+
+```
+import nbformat
+
+with open('W203_Lab_2.ipynb') as f:
+    nb = nbformat.read(f, as_version=4)
+    total_words = 0
+
+    for cell in nb['cells']:
+        if cell['cell_type'] == 'markdown':
+            total_words += len(cell['source'].split())
+    print("Total words:", total_words)
+```
 
 **Hint:** When answering questions about the potential gaps between conceptual and operational definitions it is often helpful to ask yourself "If I could do anything I wanted, including borrowing Rick's portal gun, or doing an FMRI scan on all survey takers, to operationalize this particular concept how would I do it" and then explain how that is different than what is actually measured.   
 
-# Submission Guidelines
+## Submission Guidelines
 
 - Submit _one_ report per group.
 - Submit *both* your pdf report as well as your source file.
@@ -67,18 +81,19 @@ Please limit your submission to 15 pages in total.  This means that you will hav
 - Include names of group members on the front page of the submitted report.
 - Naming structure of submitted files:
     - PDF report: [student_surname_1]\_[student_surname_2][\_*]\_lab\_2.pdf
-    - Jupyter Notebook: [student_surname_1]\_[student_surname_2][\_*]\_lab\_2.ipynb
-    
+    - Jupyter Notebook: [student_surname_1]\_[student_surname_2][\_*]\_lab\_2.ipynb (or)
+    - Rmd file: [student_surname_1]\_[student_surname_2][\_*]\_lab\_2.Rmd
+
 # Research Questions
 
 ## Question 1: Do US voters have more respect for the police or for journalists?
 
-
 ### Introduce your topic briefly.  (5 points)
-
 Explain how your variables are operationalized.  Comment on any gaps that you can identify between your operational definitions and the concepts you are trying to study.
 
-> 
+```{r}
+
+```
 
 ### Perform an exploratory data analysis (EDA) of the relevant variables. (5 points)
 
@@ -90,7 +105,7 @@ This should include a treatment of non-response and other special codes, basic s
 
 ### Based on your EDA, select an appropriate hypothesis test.  (5 points)
 
-Explain why your test is the most appropriate choice, focusing on its statistical assumptions.
+Explain why your test is the most appropriate choice.  List and evaluate all assumptions for your test.
 
 ```{r}
 
@@ -106,6 +121,7 @@ Explain (1) the statistical significance of your result, and (2) the practical s
 
 ## Question 2: Are Republican voters older or younger than Democratic voters?
 
+
 ### Introduce your topic briefly.  (5 points)
 
 Explain how your variables are operationalized.  Comment on any gaps that you can identify between your operational definitions and the concepts you are trying to study.
@@ -124,7 +140,7 @@ This should include a treatment of non-response and other special codes, basic s
 
 ### Based on your EDA, select an appropriate hypothesis test.  (5 points)
 
-Explain why your test is the most appropriate choice, focusing on its statistical assumptions.
+Explain why your test is the most appropriate choice.  List and evaluate all assumptions for your test.
 
 ```{r}
 
@@ -159,7 +175,7 @@ This should include a treatment of non-response and other special codes, basic s
 
 ### Based on your EDA, select an appropriate hypothesis test.  (5 points)
 
-Explain why your test is the most appropriate choice, focusing on its statistical assumptions.
+Explain why your test is the most appropriate choice.  List and evaluate all assumptions for your test.
 
 ```{r}
 
@@ -174,6 +190,7 @@ Explain (1) the statistical significance of your result, and (2) the practical s
 ```
 
 ## Question 4: Was anger or fear more effective at driving increases in voter turnout from 2016 to 2018?
+
 
 ### Introduce your topic briefly.  (5 points)
 
@@ -193,7 +210,7 @@ This should include a treatment of non-response and other special codes, basic s
 
 ### Based on your EDA, select an appropriate hypothesis test.  (5 points)
 
-Explain why your test is the most appropriate choice, focusing on its statistical assumptions.
+Explain why your test is the most appropriate choice.  List and evaluate all assumptions for your test.
 
 ```{r}
 
@@ -227,7 +244,7 @@ Perform an exploratory data analysis (EDA) of the relevant variables.
 This should include a treatment of non-response and other special codes, basic sanity checks, and a justification for any values that are removed.  Use visual tools to assess the relationship among your variables and comment on any features you find.
 
 Based on your EDA, select an appropriate hypothesis test.
-Explain why your test is the most appropriate choice, focusing on its statistical assumptions.
+Explain why your test is the most appropriate choice.  List and evaluate all assumptions for your test.
 
 ```{r}
 
